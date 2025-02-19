@@ -10,14 +10,16 @@ def home():
 @app.route("/ask", methods=["POST"])
 def ask():
     text = voice_input()  # Capture voice input
+    print(text)
     response = llm_model(text)  # Get AI response
     text_to_speech(response)  # Convert to speech
     
     return jsonify({"response": response})  # Send response to frontend
 
+
 @app.route("/download_audio")
 def download_audio():
-    return send_file("speech.mp3", as_attachment=True)
+    return send_file("static/speech.mp3", as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)

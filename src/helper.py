@@ -32,7 +32,8 @@ def text_to_speech(text):
     tts=gTTS(text=text, lang="en")
     
     #save the speech from the given text in the mp3 format
-    tts.save("speech.mp3")
+    # tts.save("speech.mp3")
+    tts.save("static/speech.mp3") 
 
 def llm_model(user_text):
     #model = "models/gemini-pro"
