@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Multilingual AI Assistant 🤖</h1>
+        <button id="askBtn">Ask me anything</button>
+        <p id="responseText"></p>
+        <audio id="audioPlayer" controls style="display: none;"></audio>
+        <a id="downloadLink" href="/download_audio" style="display: none;" download="speech.mp3">Download Speech</a>
+    </div>
+
+    <script>
+        document.getElementById("askBtn").addEventListener("click", function() {
+            fetch("/ask", { method: "POST" })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("responseText").innerText = data.response;
+                document.getElementById("audioPlayer").src = "/speech.mp3";
+                document.getElementById("audioPlayer").style.display = "block";
+                document.getElementById("downloadLink").style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>
